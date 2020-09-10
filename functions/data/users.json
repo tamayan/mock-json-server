@@ -1,0 +1,56 @@
+[
+  {
+    "id": 0,
+    "first_name": "Masayuki",
+    "last_name": "Kuwahara",
+    "age": 24,
+    "birthdate": "1993/07/21",
+    "type": 4,
+    "is_regular": true
+  },
+  {
+    "id": 1,
+    "first_name": "Yamato",
+    "last_name": "Maeda",
+    "age": 30,
+    "birthdate": "1987/11/05",
+    "type": 3,
+    "is_regular": true
+  },
+  {
+    "id": 2,
+    "first_name": "Jose",
+    "last_name": "Lopez",
+    "age": 34,
+    "birthdate": "1983/11/24",
+    "type": 3,
+    "is_regular": true
+  },
+  {
+    "id": 3,
+    "first_name": "Yoshitomo",
+    "last_name": "Tsutsugoh",
+    "age": 26,
+    "birthdate": "1991/11/26",
+    "type": 4,
+    "is_regular": true
+  },
+  {
+    "id": 4,
+    "first_name": "Seiya",
+    "last_name": "Hosokawa",
+    "age": 19,
+    "birthdate": "1998/08/04",
+    "type": 3,
+    "is_regular": false
+  },
+  {
+    "id": 5,
+    "first_name": "Shota",
+    "last_name": "Imanaga",
+    "age": 24,
+    "birthdate": "1993/09/01",
+    "type": 1,
+    "is_regular": true
+  }
+]
