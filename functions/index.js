@@ -4,16 +4,13 @@ const basicAuth = require('express-basic-auth')
 
 const app = express()
 
-const name = `${functions.config().basic.name}`
 const pass = `${functions.config().basic.pass}`
 
 app.use(basicAuth({
-    challenge: true,
-    authorizer(username, password) => {
-        const userMatch = basicAuth.safeCompare(username, name)
-        const passMatch = basicAuth.safeCompare(password, pass)
-        return userMatch & passMatch;
-    }
+    users: {
+        'admin': pass
+    },
+    challenge: true
 }));
 
 app.get("/users", (req, res, next) => {
@@ -25,4 +22,6 @@ app.get("/videos", (req, res, next) => {
 });
 
 const api = functions.https.onRequest(app);
-module.exports = { api };
+module.exports = {
+    api
+};
