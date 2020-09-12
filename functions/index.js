@@ -13,15 +13,16 @@ app.use(basicAuth({
     challenge: true
 }));
 
-app.get("/users", (req, res, next) => {
+app.get("/users", (req, res) => {
     res.json(require('./data/users.json'))
 });
 
-app.get("/videos", (req, res, next) => {
+app.get("/videos", (req, res) => {
     res.json(require('./data/videos.json'))
 });
 
 const api = functions.https.onRequest(app);
+
 module.exports = {
     api
 };
