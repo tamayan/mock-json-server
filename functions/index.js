@@ -1,49 +1,23 @@
 const functions = require('firebase-functions');
-const admin = require('firebase-admin');
 const express = require('express');
-
-// const cookieParser = require('cookie-parser')();
-// const cors = require('cors')({
-//     origin: true
-// });_
 
 const app = express();
 
-admin.initializeApp();
+app.use((req, res, next) => {
+    const key = functions.config().api.key;
+    const authorization = req.headers.authorization;
 
-const validateFirebaseIdToken = async (req, res, next) => {
-    if ((!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) &&
-        !(req.cookies && req.cookies.__session)) {
-        res.status(403).send('Unauthorized');
-        return;
+    if (!authorization || authorization.split(' ')[0] !== 'Bearer') {
+        throw new Error('Bad Key');
     }
 
-    let idToken;
-    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
-        idToken = req.headers.authorization.split('Bearer ')[1];
-    } else if (req.cookies) {
-        idToken = req.cookies.__session;
-    } else {
-        res.status(403).send('Unauthorized');
-        return;
+    const request_key = authorization.split(' ')[1];
+    if (!request_key || request_key !== key) {
+        throw new Error('Bad Key');
     }
 
-    try {
-        const decodedIdToken = await admin.auth().verifyIdToken(idToken);
-        req.user = decodedIdToken;
-
-        next();
-        return;
-    } catch (error) {
-        res.status(403).send('Unauthorized');
-        return;
-    }
-};
-
-// app.use(cors);
-// app.use(cookieParser);
-
-app.use(validateFirebaseIdToken);
+    next();
+});
 
 app.get("/users", (req, res) => {
     res.json(require('./data/users.json'))
